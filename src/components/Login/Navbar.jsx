@@ -37,7 +37,6 @@ function Navbar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-    setOpenProfile(true)
   };
   
 
@@ -184,7 +183,7 @@ function Navbar() {
                   </span>
                 </div>
               
-                  <MenuItem  onClick={handleCloseUserMenu} >
+                  <MenuItem   onClick = {()=> {setOpenProfile(true) ; setAnchorElUser(null);}} >
                     <Typography textAlign="center pointer" >Profile</Typography>
                   </MenuItem>
                   <MenuItem  onClick={handleSignOut}>
