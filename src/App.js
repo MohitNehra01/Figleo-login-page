@@ -1,24 +1,33 @@
-import logo from './logo.svg';
+
+import { useContext, useEffect } from 'react';
 import './App.css';
+import { AuthContext } from './context/AccountProvider';
+import Login from './components/Login/Login';
+import Home from './pages/Home';
+
 
 function App() {
+  const { isAuthenticated, setAuthenticated , setAccount } = useContext(AuthContext)
+
+    useEffect(()=>{
+            const checkLogin = ()=>{
+              if(localStorage.getItem('userLogin')){
+                setAuthenticated(true)
+                setAccount(JSON.parse(localStorage.getItem('userLogin')))
+              }
+            }
+            checkLogin();
+
+            
+    },[])
+      
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {
+        !isAuthenticated ? <Login /> : <Home />
+      }
+      
+    </>
   );
 }
 
